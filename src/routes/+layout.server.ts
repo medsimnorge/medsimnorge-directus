@@ -17,21 +17,20 @@ export const load: LayoutServerLoad = async () => {
 		if (navItemsResponse.ok) {
 			const navItemsData = await navItemsResponse.json();
 			navItems = navItemsData.data || [];
-			console.log('All nav items:', navItems);
 		}
 	} catch (err) {
 		console.error('Error fetching nav items:', err);
 	}
 
-	// Fetch site settings
+	// Fetch site settings with favicon
 	try {
-		const settingsUrl = `${DIRECTUS_URL}/items/site_settings?limit=1&fields=*`;
+		const settingsUrl = `${DIRECTUS_URL}/items/site_settings?limit=1&fields=*,favicon.*`;
 		
 		const settingsResponse = await fetch(settingsUrl, { headers });
 
 		if (settingsResponse.ok) {
 			const settingsData = await settingsResponse.json();
-			siteSettings = settingsData.data || null;
+			siteSettings = settingsData.data?.[0] || null;
 		} else {
 			console.error('Site settings fetch failed:', settingsResponse.status);
 		}
