@@ -1,0 +1,28 @@
+<script lang="ts">
+	import DynamicNavigation from "./DynamicNavigation.svelte";
+
+	interface NavItem {
+		id: number;
+		title: string;
+		url?: string;
+		parent_item?: number | null;
+		sort?: number;
+	}
+
+	let { navItems = [] }: { navItems: NavItem[] } = $props();
+</script>
+
+<header class="w-full border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 sticky top-0 z-50">
+	<div class="max-w-7xl mx-auto px-4">
+		<div class="flex items-center justify-between h-20">
+			<!-- Logo -->
+			<a href="/" class="flex items-center gap-3">
+				<img src="/MedSimNorge-logo.avif" alt="MedSimNorge Logo" class="h-12 w-12" />
+				<span class="text-xl font-bold text-gray-900 dark:text-white">MedSimNorge</span>
+			</a>
+
+			<!-- Dynamic Navigation -->
+			<DynamicNavigation {navItems} />
+		</div>
+	</div>
+</header>
