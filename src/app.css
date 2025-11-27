@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 /* stylelint-disable-next-line */
-@plugin "flowbite/plugin";
-/* stylelint-disable-next-line */
 @plugin "@tailwindcss/typography";
 /* stylelint-disable-next-line */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -151,8 +149,7 @@
   }
 }
 
-@source "../node_modules/flowbite-svelte/dist";
-@source "../node_modules/flowbite-svelte-icons/dist";
+
 /* Ex
 ternal link indicator */
 a[target="_blank"]::after {
