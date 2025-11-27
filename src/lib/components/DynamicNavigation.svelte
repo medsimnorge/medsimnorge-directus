@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Menu, X, ChevronDown } from "@lucide/svelte";
+	import { enhanceExternalLinks } from "$lib/utils";
 
 	interface NavItem {
 		id: number;
@@ -18,16 +19,11 @@
 	let mobileMenuOpen = $state(false);
 	let openDropdown = $state<number | null>(null);
 
-	// Build navigation tree
-	const topLevelItems = navItems.filter(item => !item.parent_item);
-	
-	console.log('Nav items:', navItems);
-	console.log('Top level items:', topLevelItems);
+	// Build navigation tree - use $derived for reactivity
+	const topLevelItems = $derived(navItems.filter(item => !item.parent_item));
 	
 	function getChildren(parentId: number): NavItem[] {
-		const children = navItems.filter(item => item.parent_item === parentId).sort((a, b) => (a.sort || 0) - (b.sort || 0));
-		console.log(`Children for ${parentId}:`, children);
-		return children;
+		return navItems.filter(item => item.parent_item === parentId).sort((a, b) => (a.sort || 0) - (b.sort || 0));
 	}
 
 	function toggleDropdown(itemId: number) {
@@ -36,6 +32,10 @@
 
 	function closeDropdown() {
 		openDropdown = null;
+	}
+	
+	function openDropdownMenu(itemId: number) {
+		openDropdown = itemId;
 	}
 
 	// Get href with priority: page_href > nettverkskonferanse_href > href
@@ -54,19 +54,19 @@
 </script>
 
 <!-- Desktop Navigation -->
-<nav class="hidden md:block" aria-label="Main navigation">
+<nav class="hidden md:block" aria-label="Meny">
 	<ul class="flex items-center gap-1">
 		{#each topLevelItems as item}
 			{@const children = getChildren(item.id)}
 			
-			<li class="relative">
+			<li class="relative" onmouseleave={closeDropdown}>
 				{#if children.length > 0}
 					<!-- Item with dropdown -->
 					<button
 						class="inline-flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
 						onclick={() => toggleDropdown(item.id)}
-						onmouseover={() => openDropdown = item.id}
-						onfocus={() => openDropdown = item.id}
+						onmouseenter={() => openDropdownMenu(item.id)}
+						onfocus={() => openDropdownMenu(item.id)}
 						aria-expanded={openDropdown === item.id}
 						aria-haspopup="true"
 					>
@@ -76,11 +76,11 @@
 					
 					{#if openDropdown === item.id}
 						<div 
-							class="absolute left-0 top-full mt-1 w-80 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg z-50"
+							class="absolute left-0 top-full pt-1 w-80 z-50"
 							role="menu"
 							tabindex="-1"
-							onmouseleave={closeDropdown}
 						>
+							<div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg">
 							<ul class="p-2">
 								{#each children as child}
 									<li>
@@ -95,13 +95,14 @@
 											</div>
 											{#if child.description}
 												<div class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
-													{@html child.description}
+													{@html enhanceExternalLinks(child.description)}
 												</div>
 											{/if}
 										</a>
 									</li>
 								{/each}
 							</ul>
+							</div>
 						</div>
 					{/if}
 				{:else}

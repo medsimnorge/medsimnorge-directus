@@ -8,8 +8,6 @@ export const load: PageServerLoad = async ({ params }) => {
 	try {
 		const url = `${DIRECTUS_URL}/items/nettverkskonferanser?filter[permalink][_eq]=${permalink}&filter[status][_eq]=published&fields=*,blocks.*,blocks.item:block_herowithimage.*,blocks.item:block_richtext.*,blocks.item:block_teammember.*`;
 
-		console.log(`Fetching nettverkskonferanse:`, url);
-
 		const response = await fetch(url, {
 			headers: {
 				'Authorization': `Bearer ${DIRECTUS_ADMIN_TOKEN}`
@@ -18,7 +16,6 @@ export const load: PageServerLoad = async ({ params }) => {
 
 		if (response.ok) {
 			const data = await response.json();
-			console.log('Nettverkskonferanse data:', JSON.stringify(data, null, 2));
 			
 			if (data.data && data.data.length > 0) {
 				return {

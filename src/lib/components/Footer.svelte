@@ -18,7 +18,7 @@
 
       <!-- Description -->
       {#if siteSettings?.description}
-        <div class="my-4 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+        <div class="my-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           {@html siteSettings.description}
         </div>
       {/if}
@@ -45,7 +45,7 @@
       </nav>
 
       <!-- Copyright -->
-      <p class="text-sm text-gray-500 dark:text-gray-400">
+      <p class="text-sm text-gray-600 dark:text-gray-400">
         &copy; {new Date().getFullYear()} 
         <a href="/" class="hover:underline hover:text-primary transition-colors">
           {siteSettings?.name || 'MedSimNorge'}

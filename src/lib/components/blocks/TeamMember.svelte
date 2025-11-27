@@ -53,7 +53,7 @@
 			<div class="flex flex-wrap gap-4 text-sm">
 				E-post: <a 
 					href="mailto:{content.email}" 
-					class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 transition-colors"
+					class="text-primary-800 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300 transition-colors font-semibold"
 				>
 					{content.email}
 				</a>

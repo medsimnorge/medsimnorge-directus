@@ -9,8 +9,6 @@ export const load: PageServerLoad = async ({ params }) => {
 		// Fetch only from pages collection with status filter
 		const url = `${DIRECTUS_URL}/items/pages?filter[permalink][_eq]=${permalink}&filter[status][_eq]=published&fields=*,blocks.*,blocks.item:block_herowithimage.*,blocks.item:block_richtext.*,blocks.item:block_teammember.*`;
 
-		console.log(`Fetching page:`, url);
-
 		const response = await fetch(url, {
 			headers: {
 				'Authorization': `Bearer ${DIRECTUS_ADMIN_TOKEN}`

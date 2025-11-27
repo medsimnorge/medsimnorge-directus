@@ -24,3 +24,19 @@ export function getAssetUrl(assetId?: string | { id: string } | null): string | 
 	const id = typeof assetId === 'string' ? assetId : assetId.id;
 	return `/assets/${id}`;
 }
+
+/**
+ * Enhance HTML content by adding accessibility features to external links
+ * Adds screen reader text to links with target="_blank"
+ * @param html - HTML string from Directus
+ * @returns Enhanced HTML with accessibility improvements
+ */
+export function enhanceExternalLinks(html: string): string {
+	if (!html) return html;
+	
+	// Add screen reader text to external links
+	return html.replace(
+		/<a([^>]*target=["']_blank["'][^>]*)>(.*?)<\/a>/gi,
+		'<a$1>$2<span class="sr-only"> (åpnes i ny fane)</span></a>'
+	);
+}
