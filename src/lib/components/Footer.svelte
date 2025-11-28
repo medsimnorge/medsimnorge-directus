@@ -41,6 +41,11 @@
               Kontakt oss
             </a>
           </li>
+          <li>
+            <a href="/personvern" class="hover:underline hover:text-primary transition-colors">
+              Personvernerkl&aelig;ring
+            </a>
+          </li>
         </ul>
       </nav>
 

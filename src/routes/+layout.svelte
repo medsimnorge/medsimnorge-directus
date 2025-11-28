@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '../app.css';
 	import defaultFavicon from '$lib/assets/MedSimNorge-favicon.png';
-	import Analytics from '$lib/components/Analytics.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { getAssetUrl } from '$lib/utils';
@@ -27,7 +26,6 @@
 	Hopp til hovedinnhold
 </a>
 
-<Analytics />
 <Header navItems={data.navItems} />
 <main id="main">
 {@render children?.()}
