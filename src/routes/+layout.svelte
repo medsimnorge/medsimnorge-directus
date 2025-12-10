@@ -12,6 +12,15 @@
 	const faviconUrl = data.siteSettings?.favicon 
 		? getAssetUrl(data.siteSettings.favicon) 
 		: defaultFavicon;
+	
+	// Background image from site_settings (only if enabled)
+	const shouldShowBackground = data.siteSettings?.use_bgimage === true;
+	const backgroundImageUrl = shouldShowBackground && data.siteSettings?.bg_image 
+		? getAssetUrl(data.siteSettings.bg_image) 
+		: null;
+	
+	// Generate background style
+	const backgroundStyle = backgroundImageUrl ? `background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;` : '';
 </script>
 
 <svelte:head>
@@ -27,7 +36,18 @@
 </a>
 
 <Header navItems={data.navItems} />
-<main id="main">
-{@render children?.()}
+<main 
+	id="main" 
+	class="relative min-h-screen"
+	style={backgroundStyle}
+>
+	{#if backgroundImageUrl}
+		<!-- Subtle overlay for better text readability -->
+		<div class="absolute inset-0 bg-white/20 dark:bg-gray-900/30"></div>
+	{/if}
+	
+	<div class="relative z-10">
+		{@render children?.()}
+	</div>
 </main>
 <Footer siteSettings={data.siteSettings} />
