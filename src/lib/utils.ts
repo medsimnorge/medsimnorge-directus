@@ -43,7 +43,7 @@ export function enhanceExternalLinks(html: string): string {
 
 /**
  * Obfuscate emails in HTML content (for RichText blocks)
- * Replaces email addresses with JavaScript-based obfuscated versions
+ * Replaces email addresses with HTML entity encoded versions
  * @param html - HTML content that may contain email addresses
  * @returns HTML with obfuscated email addresses that display normally to users
  */
@@ -54,19 +54,7 @@ export function obfuscateEmailsInHtml(html: string): string {
 	const emailPattern = /\b([A-Za-z0-9._%+-]+)@([A-Za-z0-9.-]+\.[A-Z|a-z]{2,})\b/g;
 	
 	return html.replace(emailPattern, (match, localPart, domain) => {
-		// Create a span that will be populated by JavaScript
-		const id = `email-${Math.random().toString(36).substr(2, 9)}`;
-		return `<span id="${id}" class="obfuscated-email" data-local="${btoa(localPart)}" data-domain="${btoa(domain)}"></span>
-		<script>
-			(function() {
-				const el = document.getElementById('${id}');
-				if (el) {
-					const local = atob(el.dataset.local);
-					const domain = atob(el.dataset.domain);
-					const email = local + '@' + domain;
-					el.innerHTML = '<a href="mailto:' + email + '" class="text-primary-800 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300 transition-colors font-semibold">' + email + '</a>';
-				}
-			})();
-		</script>`;
+		// Simple HTML entity obfuscation - still readable by users but harder for bots
+		return localPart + '&#64;' + domain;
 	});
 }

@@ -139,14 +139,9 @@ test.describe('Dynamic Content Accessibility', () => {
 			.withTags(['wcag2a', 'wcag2aa'])
 			.analyze();
 
-		// Log violations for debugging
+		// Check for accessibility violations
 		if (accessibilityScanResults.violations.length > 0) {
-			console.log('Accessibility violations found:');
-			accessibilityScanResults.violations.forEach(violation => {
-				console.log(`- ${violation.id}: ${violation.help}`);
-				console.log(`  Impact: ${violation.impact}`);
-				console.log(`  Nodes: ${violation.nodes.length}`);
-			});
+			// Violations will be reported by the expect statement below
 		}
 
 		expect(accessibilityScanResults.violations).toEqual([]);
@@ -185,7 +180,7 @@ test.describe('Dynamic Content Accessibility', () => {
 			const linkCount = await dropdownLinks.count();
 			expect(linkCount).toBeGreaterThan(0);
 		} else {
-			console.log('No dropdown buttons found - skipping test');
+			// No dropdown buttons found - skipping test
 		}
 	});
 });

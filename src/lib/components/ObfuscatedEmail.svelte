@@ -33,7 +33,6 @@
 
 	// Split email for obfuscation in HTML source
 	const [localPart, domain] = email.split('@');
-	const [domainName, tld] = domain?.split('.') || ['', ''];
 	
 	// Create a safe fallback href
 	const fallbackHref = `mailto:${email.replace('@', '%40')}`;
@@ -50,9 +49,7 @@
 		<!-- Obfuscated in HTML source, but JavaScript will replace with real email -->
 		<span style="display:none;">{localPart}</span>
 		<span style="display:none;">@</span>
-		<span style="display:none;">{domainName}</span>
-		<span style="display:none;">.</span>
-		<span style="display:none;">{tld}</span>
+		<span style="display:none;">{domain}</span>
 		<!-- Fallback text for when JavaScript is disabled -->
 		<noscript>{displayText || email}</noscript>
 	</span>
