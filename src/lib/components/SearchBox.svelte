@@ -15,7 +15,7 @@
 	let suggestions = $state<any[]>([]);
 	let showSuggestions = $state(false);
 	let isLoading = $state(false);
-	let searchTimeout: number;
+	let searchTimeout: ReturnType<typeof setTimeout>;
 	let searchBoxRef: HTMLDivElement;
 
 	// Debounced search for suggestions

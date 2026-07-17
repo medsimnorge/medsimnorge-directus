@@ -1,14 +1,6 @@
 <script lang="ts">
-	import DynamicNavigation from "./DynamicNavigation.svelte";
+	import DynamicNavigation, { type NavItem } from "./DynamicNavigation.svelte";
 	import SearchBox from "./SearchBox.svelte";
-
-	interface NavItem {
-		id: number;
-		title: string;
-		url?: string;
-		parent_item?: number | null;
-		sort?: number;
-	}
 
 	let { navItems = [] }: { navItems: NavItem[] } = $props();
 </script>

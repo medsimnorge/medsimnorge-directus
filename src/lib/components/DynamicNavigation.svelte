@@ -2,7 +2,7 @@
 	import { Menu, X, ChevronDown } from "@lucide/svelte";
 	import { enhanceExternalLinks } from "$lib/utils";
 
-	interface NavItem {
+	export interface NavItem {
 		id: number;
 		label: string;
         description?: string;
