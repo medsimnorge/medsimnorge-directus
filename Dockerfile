@@ -9,8 +9,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml* .npmrc* ./
 
 # Install dependencies
-RUN pnpm config set only-built-dependencies esbuild
-RUN pnpm install --frozen-lockfile || pnpm install
+RUN pnpm config set only-built-dependencies esbuild && pnpm install --frozen-lockfile || pnpm install
 
 # Copy source code
 COPY . .
