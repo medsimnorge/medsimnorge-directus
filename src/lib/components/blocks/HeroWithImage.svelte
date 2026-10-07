@@ -25,11 +25,11 @@
   });
 </script>
 
-<section class={cn("min-h-[calc(100vh-8rem)] flex items-center", className)}>
+<section class={cn("min-h-[calc(100vh-6rem)] flex items-center", className)}>
   <div class="max-w-7xl mx-auto px-4 w-full">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
       <div>
-        <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+        <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl dark:text-white">
           {content.title}
         </h1>
         {#if content.subtitle}
