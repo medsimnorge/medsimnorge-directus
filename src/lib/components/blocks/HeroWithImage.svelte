@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ArrowRight } from "@lucide/svelte";
+  import {ArrowRight} from "lucide-svelte";
   import { cn, getAssetUrl } from "$lib/utils";
 
   interface HeroContent {
@@ -12,7 +12,7 @@
 
   let { content, class: className = "" }: { content: HeroContent, class?: string } = $props();
   
-  const imageUrl = getAssetUrl(content.image);
+  const imageUrl = $derived(getAssetUrl(content.image));
   const primaryLinkHref = $derived.by(() => {
     const primaryLink = content.primary_link;
     if (typeof primaryLink === "string") {
@@ -47,7 +47,7 @@
               class="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium bg-radial-[at_50%_50%] from-blue-200 to-indigo-300 hover:from-blue-100 hover:to-indigo-200 rounded-lg transition-colors"
             >
               {content.primary_link_text}
-              <ArrowRight class="w-5 h-5" />
+              <ArrowRight class="w-4 h-4" />
             </a>
           {/if}
           <a 
