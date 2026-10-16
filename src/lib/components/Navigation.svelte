@@ -93,21 +93,21 @@
 
                         <hr class="border-b-2 border-blue-50">
 
-                        <NavigationMenu.Link href="/om-oss/historie">
+                        <NavigationMenu.Link href="/historie">
                             <div class="font-medium">Historie</div>
                             <div class="text-muted-foreground">
                                 Historien om hvordan MedSimNorge ble til
                             </div>
                         </NavigationMenu.Link>
                         
-                        <NavigationMenu.Link href="/om-oss/vedtekter">
+                        <NavigationMenu.Link href="/vedtekter">
                             <div class="font-medium">Vedtekter</div>
                             <div class="text-muted-foreground">
                                 V&aring;re vedtekter
                             </div>
                         </NavigationMenu.Link>
                         
-                        <NavigationMenu.Link href="/om-oss/mandat">
+                        <NavigationMenu.Link href="/mandat">
                             <div class="font-medium">Mandat</div>
                             <div class="text-muted-foreground">
                                 V&aring;rt mandat

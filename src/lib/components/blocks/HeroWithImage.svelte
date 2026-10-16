@@ -21,6 +21,9 @@
 
     const permalink = primaryLink?.permalink;
     if (!permalink) return undefined;
+    if (permalink.startsWith("nettverkskonferanse")) {
+      return `/nettverkskonferanser/${permalink}`;
+    }
     return permalink === "home" ? "/" : `/${permalink}`;
   });
 </script>
